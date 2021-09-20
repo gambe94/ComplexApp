@@ -9,7 +9,7 @@ before_install:
 
 
 script:
-  - docker run -e CI=true USERNAME/react-test npm test
+  - docker run -e CI=true gambe94/react-test npm test
 
 after_success:
   - docker build -t gambe94/complex-client ./client
