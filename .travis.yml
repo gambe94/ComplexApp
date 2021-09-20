@@ -19,7 +19,7 @@ after_success:
 
   - echo "$DOCKER_PW" | docker login -u "$DOCKER_ID"  --password-stdin
   
-  - dokcer push gambe94/complex-client
-  - dokcer push gambe94/complex-nginx 
-  - dokcer push gambe94/complex-server
-  - dokcer push gambe94/complex-worker
+  - docker push gambe94/complex-client
+  - docker push gambe94/complex-nginx 
+  - docker push gambe94/complex-server
+  - docker push gambe94/complex-worker
