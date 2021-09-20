@@ -1,0 +1,25 @@
+sudo:required
+language: generic 
+services:
+  - docker
+
+
+before_install:
+  - docker build -t gambe94/react-test -f ./client/Dockerfile.dev ./client
+
+
+script:
+  - docker run -e CI=true USERNAME/react-test npm test
+
+after_success:
+  - docker build -t gambe94/complex-client ./client
+  - docker build -t gambe94/complex-nginx ./nginx
+  - docker build -t gambe94/complex-server ./server
+  - docker build -t gambe94/complex-worker ./worker
+
+  - echo "$DOCKER_PW" | docker login -u "$DOCKER_ID"  --password-stdin
+  
+  - dokcer push gambe94/complex-client
+  - dokcer push gambe94/complex-nginx 
+  - dokcer push gambe94/complex-server
+  - dokcer push gambe94/complex-worker
